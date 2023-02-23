@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+</head>
+<body>
+<a th:href="@{/employees/create}">Create employee</a>
+<p th:text="${message}"></p>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Image</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="row, status : ${employees}">
+        <td th:text="${row.id}"></td>
+        <td th:text="${row.name}"></td>
+        <td th:text="${row.address}"></td>
+        <td><img width="100" height="100" th:src="@{'/images/' + ${row.image}}" alt="Ảnh"></td>
+        <td>
+            <a th:href="@{/employees/update/{id}(id = ${row.id})}">Sửa</a>
+            <button th:onclick="'deleteEmployee('+${row.id}+')'">Xóa</button>
+        </td>
+    </tr>
+</table>
+</body>
+<script>
+    function deleteEmployee(id){
+        let res = window.confirm("Bạn có chắn chắn muốn xóa không?");
+        if(res){
+            window.location.href = '/employees/delete/'+id ;
+        }
+        else {
+            alert("Hủy xóa!")
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+<h3>Add Customer</h3>
+<p>
+    <a th:href="@{/employees}">
+        Back to customer list
+    </a>
+</p>
+<div id="form">
+    <form th:object="${employee}"
+          method="POST" novalidate="novalidate" enctype="multipart/form-data">
+        <div>
+            <label>Name</label>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="email" th:field="*{address}"/>
+        </div>
+        <div>
+            <label>Image</label>
+            <input type="file" th:field="*{image}" th:value="${employee.image}"/>
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
+</body>
+</html>
